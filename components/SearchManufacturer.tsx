@@ -81,10 +81,7 @@ const SearchManufacturer = ({
                                                     }`}
                                                 >
                                                     {item}
-                                                    {selected}
                                                 </span>
-                                                /** TODO: selected
-                                                がTRUEになるのはいつ？調べる */
                                                 {selected ? (
                                                     <span
                                                         className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
@@ -92,7 +89,14 @@ const SearchManufacturer = ({
                                                                 ? "text-white"
                                                                 : "text-primary-blue bg-primary-purple"
                                                         }`}
-                                                    ></span>
+                                                    >
+                                                        {/* <Image
+                                                            src="/check.svg"
+                                                            alt="check"
+                                                            width={14}
+                                                            height={14}
+                                                        /> */}
+                                                    </span>
                                                 ) : null}
                                             </>
                                         );
