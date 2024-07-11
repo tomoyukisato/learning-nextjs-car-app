@@ -1,4 +1,4 @@
-import { FilterProps } from "@/types";
+import { CarProps, FilterProps } from "@/types";
 
 export const updateSearchParams = (type: string, value: string) => {
     const searchParams = new URLSearchParams(window.location.search);
@@ -22,10 +22,11 @@ export const calculateCarRent = (city_mpg: number, year: number) => {
 
     return rentalRatePerDay.toFixed(0);
 };
+
 export async function fetchCars(filters: FilterProps) {
-    const url =
-        "https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?model=corolla";
-    console.log(process.env.NEXT_PUBLIC_RAPID_API_KEY);
+    const { manufacturer, year, model, limit, fuel } = filters;
+
+    const url = `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${manufacturer}&year=${year}&model=${model}&limit=${limit}&fuel_type=${fuel}`;
     const options = {
         method: "GET",
         headers: {
@@ -44,3 +45,21 @@ export async function fetchCars(filters: FilterProps) {
         console.error(error);
     }
 }
+
+export const generateCarImageUrl = (car: CarProps, angle?: string) => {
+    const url = new URL("https://cdn.imagin.studio/getimage");
+    const { make, model, year } = car;
+
+    url.searchParams.append(
+        "customer",
+        process.env.NEXT_PUBLIC_IMAGIN_API_KEY || ""
+    );
+    url.searchParams.append("make", make);
+    url.searchParams.append("modelFamily", model.split(" ")[0]);
+    url.searchParams.append("zoomType", "fullscreen");
+    url.searchParams.append("modelYear", `${year}`);
+    // url.searchParams.append('zoomLevel', zoomLevel);
+    url.searchParams.append("angle", `${angle}`);
+
+    return `${url}`;
+};
