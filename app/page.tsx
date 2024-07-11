@@ -7,11 +7,11 @@ import Image from "next/image";
 
 export default async function Home({ searchParams }: HomeProps) {
     const allCars = await fetchCars({
-        manufacture: searchParams.manufacture || "",
-        year: searchParams.year || 2022,
+        manufacturer: searchParams.manufacturer || "",
+        year: searchParams.year || 2023,
         fuel: searchParams.fuel || "",
         limit: searchParams.limit || 10,
-        model: searchParams.model || "",
+        model: searchParams.model || "callora",
     });
     const isDataEmpty =
         !Array.isArray(allCars) || allCars.length < 1 || !allCars;

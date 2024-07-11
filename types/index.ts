@@ -40,7 +40,7 @@ export interface SearchManufacturerProps {
 }
 
 export interface FilterProps {
-    manufacture?: string;
+    manufacturer?: string;
     year?: number;
     model?: string;
     limit?: number;
